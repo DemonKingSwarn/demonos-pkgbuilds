@@ -1,0 +1,71 @@
+# Maintainer: Swarnaditya Singh <demonkingswarn@protonmail.com>
+pkgname=demonos-dotfiles
+_pkgname="dotfiles"
+pkgver=1.r1.a0ac32e
+pkgrel=1
+epoch=
+pkgdesc="The config files from demonos."
+arch=('any')
+url="https://github.com/demonkingswarn/dotfiles.git"
+license=('GPL3')
+groups=()
+depends=(
+  hyprland 
+  swww 
+  grim 
+  slurp 
+  swappy 
+  hyprlock 
+  dunst
+  wayland
+  kitty
+  foot
+  rofi-wayland
+  copyq
+  zsh
+  mpv
+  fastfetch
+  pipewire
+  pipewire-alsa
+  pipewire-pulse
+  pipewire-jack
+  wireplumber
+  noise-suppression-for-voice
+  rnnoise
+  waybar
+  zathura
+  zathura-pdf-mupdf
+  thunar
+  cava
+  demonos-scripts
+  demonos-core-fonts
+  demonos-wallpapers
+  greet
+)
+makedepends=(git)
+checkdepends=()
+optdepends=()
+provides=(demonos-hyprland)
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=${pkgname}.install
+changelog=
+source=("git+$url")
+noextract=()
+md5sums=('SKIP')
+validpgpkeys=()
+
+pkgver() {
+    printf "1.r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+package() {
+  cd "${_pkgname}"
+  install -d ${pkgdir}/opt/demonos-dotfiles/
+  rm -rf ${srcdir}/${_pkgname}/.git
+  cp -r ${srcdir}/${_pkgname}/.config/ ${pkgdir}/opt/demonos-dotfiles/
+  cp -r ${srcdir}/${_pkgname}/.local/ ${pkgdir}/opt/demonos-dotfiles/
+  cp -r ${srcdir}/${_pkgname}/.bashrc ${pkgdir}/opt/demonos-dotfiles/
+}

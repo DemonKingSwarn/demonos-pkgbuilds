@@ -1,0 +1,35 @@
+# Maintainer: Swarnaditya Singh <demonkingswarn@protonmail.com>
+pkgname=demonos-scripts
+pkgver=1.r1.a0ac32e
+pkgrel=1
+epoch=
+pkgdesc="The demonos scripts."
+arch=('any')
+url="https://github.com/demonkingswarn/scripts.git"
+license=('GPL3')
+groups=()
+depends=()
+makedepends=(git)
+checkdepends=()
+optdepends=()
+provides=(demonos-hyprland)
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=${pkgname}.install
+changelog=
+source=("git+$url")
+noextract=()
+md5sums=('SKIP')
+validpgpkeys=()
+
+pkgver() {
+    printf "1.r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+package() {
+  cd "scripts"
+  install -d ${pkgdir}/opt/demonos-scripts/
+  cp -r ${srcdir}/scripts/ ${pkgdir}/opt/demonos-scripts/
+}
